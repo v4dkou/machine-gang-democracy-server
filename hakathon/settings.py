@@ -49,6 +49,7 @@ INSTALLED_APPS = [
     'accounts',
     'chats',
     'notifications',
+    'democracy',
     'django_extensions',
 ]
 
