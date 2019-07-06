@@ -12,3 +12,4 @@ Markdown==3.1.1
 coreapi==2.3.3
 djangorestframework-jwt==1.11.0
 pyfcm==1.4.7
+drf-yasg==1.16.0

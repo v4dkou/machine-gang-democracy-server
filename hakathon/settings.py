@@ -50,6 +50,7 @@ INSTALLED_APPS = [
     'chats',
     'notifications',
     'democracy',
+    'drf_yasg',
     'django_extensions',
 ]
 
