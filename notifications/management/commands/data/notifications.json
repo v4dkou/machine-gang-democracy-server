@@ -1,0 +1,31 @@
+[{
+	"slug": "acc-password-recovery",
+	"name": "Password recovery",
+	"variables": ["recovery_code", "fullname"],
+	"title_template": "Password recovery",
+	"template": "You have applied for password recovery, to reset password enter this code manually to app:\n\n{{recovery_code}}"
+}, {
+	"slug": "acc-registration-greeting",
+	"name": "Registration greeting",
+	"variables": ["fullname"],
+	"title_template": "Hello, {{fullname}}!",
+	"template": "Thank you for registration!"
+}, {
+	"slug": "acc-registration-confirm",
+	"name": "Confirm registration",
+	"variables": ["confirmation_code", "fullname"],
+	"title_template": "Email confirmation",
+	"template": "Greetings, {{fullname}}! You have registered in \"Hakathon\"!\n\nTo confirm email please enter this code into app:\n\n{{confirmation_code}}"
+}, {
+	"slug": "acc-registration-sms-confirm",
+	"name": "Confirm registration (sms)",
+	"variables": ["confirmation_code", "fullname"],
+	"title_template": "Phone confirmation",
+	"template": "Greetings, {{fullname}}! You have registered in \"Hakathon\"!\n\nTo confirm phone please enter this code into app:\n\n{{confirmation_code}}"
+}, {
+	"slug": "acc-password-sms-recovery",
+	"name": "Password recovery (sms)",
+	"variables": ["recovery_code", "fullname"],
+	"title_template": "Password recovery",
+	"template": "You have applied for password recovery, to reset password enter this code manually to app:\n\n{{recovery_code}}"
+}]

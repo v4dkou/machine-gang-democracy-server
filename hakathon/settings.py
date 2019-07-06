@@ -48,6 +48,7 @@ INSTALLED_APPS = [
     'hakathon',
     'accounts',
     'chats',
+    'notifications',
     'django_extensions',
 ]
 
@@ -174,6 +175,7 @@ SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROT', 'https')
 
 
 # REST framework
+
 import datetime
 REST_FRAMEWORK = {
     'DEFAULT_RENDERER_CLASSES': list(filter(None, (
@@ -189,8 +191,13 @@ REST_FRAMEWORK = {
         'rest_framework.authentication.SessionAuthentication',
     ),
     'JWT_ALLOW_REFRESH': False,
-    'JWT_EXPIRATION_DELTA': datetime.timedelta(minutes=15),
+    'JWT_EXPIRATION_DELTA': datetime.timedelta(days=15),
     'JWT_PAYLOAD_HANDLER': 'accounts.jwt_serializers.jwt_payload_handler',
 }
 
 AUTH_USER_MODEL = 'accounts.User'
+
+
+# Push notifications
+
+FCM_API_KEY = os.getenv('FCM_API_KEY')
