@@ -10,6 +10,7 @@ from accounts.models import UserSession
 from accounts.jwt_serializers import JSONWebTokenSerializer, RefreshTokenSerializer
 from accounts.utils import generate_session_token
 from accounts.jwt_utils import create_session, sign_response_with_refresh_token
+from accounts.serializers import UserSerializer
 
 
 def jwt_response_payload_handler(token, user, request):
@@ -18,6 +19,7 @@ def jwt_response_payload_handler(token, user, request):
     response_data = default_handler(token, user, request)
 
     response_data['user_id'] = user.id
+    response_data['user'] = UserSerializer(user).data
 
     return response_data
 
