@@ -1,0 +1,13 @@
+Django==2.2.3
+djangorestframework==3.9.4
+djangorestframework-jwt==1.11.0
+djangorestframework-camel-case==1.0.3
+psycopg2==2.8.3
+gunicorn==19.9.0
+ipython==7.6.1
+ipython-genutils==0.2.0
+django-extensions==2.1.9
+Pygments==2.4.2
+Markdown==3.1.1
+coreapi==2.3.3
+djangorestframework-jwt==1.11.0
