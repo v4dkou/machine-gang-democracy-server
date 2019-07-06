@@ -55,3 +55,22 @@ class InitiativeProcessStepViewSet(mixins.UpdateModelMixin, mixins.DestroyModelM
     queryset = m.InitiativeProcessStep
     serializer_class = s.InitiativeProcessStepSerializer
     permission_classes = (IsAuthenticated, )
+
+
+class AdvertisementCategoryViewset(mixins.ListModelMixin, viewsets.GenericViewSet):
+    queryset = m.AdvertisementCategory.objects.all()
+    serializer_class = s.AdvertisementCategorySerializer
+    permission_classes = (IsAuthenticated, )
+
+
+class AdvertisementViewset(mixins.ListModelMixin, mixins.CreateModelMixin, viewsets.GenericViewSet):
+    serializer_class = s.AdvertisementSerializer
+    permission_classes = (IsAuthenticated, )
+
+    def get_queryset(self):
+        queryset = m.Advertisement.objects.all()
+
+        if 'subcategory' in self.request.query_params:
+            queryset = queryset.filter(subcategory=self.request.query_params['subcategory'])
+
+        return queryset

@@ -68,3 +68,32 @@ class Announcement(models.Model):
     topic = models.OneToOneField(DiscussionTopic, verbose_name='Topic', primary_key=True, on_delete=models.CASCADE, related_name='announcement')
 
     announcement_description = models.TextField('Announcement description')
+
+
+class AdvertisementCategory(models.Model):
+    name = models.CharField('Name', max_length=255)
+
+    order_col = models.PositiveIntegerField('Order', default=0)
+
+
+class AdvertisementSubcategory(models.Model):
+    category = models.ForeignKey(AdvertisementCategory, verbose_name='Category', related_name='subcategories', on_delete=models.CASCADE)
+    name = models.CharField('Name', max_length=255)
+
+    order_col = models.PositiveIntegerField('Order', default=0)
+
+
+class Advertisement(models.Model):
+    subcategory = models.ForeignKey(AdvertisementSubcategory, verbose_name='Subcategory', related_name='ads', on_delete=models.CASCADE)
+
+    title = models.CharField('Title', max_length=255)
+    description = models.TextField('Description')
+    image = models.ImageField(upload_to='ads_images')
+
+    price = models.PositiveIntegerField('Price', default=0)
+    range = models.PositiveIntegerField('Range', default=0)
+
+    is_paid = models.BooleanField('Is paid')
+    paid_period = models.PositiveIntegerField('Paid period', default=0)
+
+    date_created = models.DateTimeField('Created', default=timezone.now, editable=False)

@@ -168,3 +168,58 @@ class AnnouncementSerializer(serializers.ModelSerializer):
         data['topic'] = topic_serializer.instance
 
         return super().create(data)
+
+
+class AdvertisementSubcategorySerializer(serializers.ModelSerializer):
+    class Meta:
+        model = m.AdvertisementSubcategory
+        fields = ('id', 'name', )
+        read_only_fields = ('id', 'name', )
+
+
+class AdvertisementCategorySerializer(serializers.ModelSerializer):
+    subcategories = AdvertisementSubcategorySerializer(many=True, read_only=True)
+    promo = serializers.SerializerMethodField()
+
+    class Meta:
+        model = m.AdvertisementCategory
+        fields = (
+            'id',
+            'name',
+            'subcategories',
+            'promo',
+        )
+        read_only_fields = (
+            'id',
+            'name',
+            'subcategories',
+            'promo',
+        )
+
+    def get_promo(self, obj):
+        promo = m.Advertisement.objects \
+            .filter(subcategory__category=obj, is_paid=True) \
+            .order_by('?') \
+            .first()
+
+        if not promo:
+            return None
+
+        return AdvertisementSerializer(promo).data
+
+
+class AdvertisementSerializer(serializers.ModelSerializer):
+    subcategory = AdvertisementSubcategorySerializer()
+
+    class Meta:
+        model = m.Advertisement
+        fields = (
+            'subcategory',
+            'title',
+            'description',
+            'image',
+            'price',
+            'range',
+            'is_paid',
+            'paid_period',
+        )
