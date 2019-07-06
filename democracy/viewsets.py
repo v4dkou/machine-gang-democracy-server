@@ -6,12 +6,14 @@ from rest_framework.response import Response
 
 from . import models as m
 from . import serializers as s
+from .pagination import DateUpdatedPagination
 
 
 class DiscussionTopicViewSet(mixins.ListModelMixin, viewsets.GenericViewSet):
     queryset = m.DiscussionTopic.objects.all()
     serializer_class = s.DiscussionTopicSerializer
     permission_classes = (IsAuthenticated, )
+    pagination_class = DateUpdatedPagination
 
     def list(self, *args, **kwargs):
         return super().list(*args, **kwargs)

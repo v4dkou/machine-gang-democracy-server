@@ -8,9 +8,12 @@ from chats.models import Chat
 
 class DiscussionTopic(models.Model):
     NEW = 'new'
+    VOTING = 'voting'
     CLOSED = 'closed'
+
     STATUSES = (
         (NEW, 'New'),
+        (VOTING, 'Voting'),
         (CLOSED, 'Closed'),
     )
 
@@ -18,6 +21,7 @@ class DiscussionTopic(models.Model):
     description = models.TextField('Description')
     status = models.CharField('Status', max_length=16, choices=STATUSES, default=NEW)
     chat = models.ForeignKey(Chat, related_name='topic', on_delete=models.CASCADE)
+    alert = models.BooleanField('Is alert', default=False)
 
     date_created = models.DateTimeField('Created', default=timezone.now, editable=False)
     date_updated = models.DateTimeField('Updated', auto_now=True)
