@@ -7,9 +7,11 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework.decorators import action
 from rest_framework.response import Response
 
+from accounts.models import User
 from . import models as m
 from . import serializers as s
 from .pagination import DateCreatedPagination
+from notifications.tasks import send_push
 
 
 class ChatViewSet(mixins.ListModelMixin, viewsets.GenericViewSet):
@@ -56,4 +58,15 @@ class MessageViewSet(mixins.CreateModelMixin, mixins.DestroyModelMixin, viewsets
 
     def perform_create(self, serializer):
         serializer.save(user=self.request.user)
-        requests.post(settings.WEBSOCKET_API_ENDPOINT, json=serializer.data)
+        try:
+            requests.post(settings.WEBSOCKET_API_ENDPOINT, json=serializer.data)
+        except Exception as e:
+            # ignore any errors
+            print(e)
+
+        for user in User.objects.all():
+            try:
+                send_push(user, data=serializer.data)
+            except Exception as e:
+                # ignore any errors
+                print(e)
