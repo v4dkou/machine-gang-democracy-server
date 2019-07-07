@@ -203,3 +203,8 @@ AUTH_USER_MODEL = 'accounts.User'
 # Push notifications
 
 FCM_API_KEY = os.getenv('FCM_API_KEY')
+
+
+# Websocket chats
+
+WEBSOCKET_API_ENDPOINT = 'http://localhost:3000/msg/'

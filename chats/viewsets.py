@@ -1,4 +1,6 @@
+import requests
 from django.db.models import Max
+from django.conf import settings
 from rest_framework import viewsets
 from rest_framework import mixins
 from rest_framework.permissions import IsAuthenticated
@@ -51,3 +53,7 @@ class MessageViewSet(mixins.CreateModelMixin, mixins.DestroyModelMixin, viewsets
             return m.Message.objects.none()
 
         return m.Message.objects.filter(user=user)
+
+    def perform_create(self, serializer):
+        serializer.save(user=self.request.user)
+        requests.post(settings.WEBSOCKET_API_ENDPOINT, json=serializer.data)

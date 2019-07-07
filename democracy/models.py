@@ -19,6 +19,7 @@ class DiscussionTopic(models.Model):
 
     user = models.ForeignKey(User, verbose_name='Owner', related_name='discussion_topics', on_delete=models.CASCADE)
     description = models.TextField('Description')
+    image = models.ImageField(upload_to='discussion_images', null=True, blank=True)
     status = models.CharField('Status', max_length=16, choices=STATUSES, default=NEW)
     chat = models.ForeignKey(Chat, related_name='topic', on_delete=models.CASCADE)
     alert = models.BooleanField('Is alert', default=False)

@@ -17,6 +17,7 @@ class DiscussionTopicSerializer(serializers.ModelSerializer):
             'user',
             'chat',
             'description',
+            'image',
             'alert',
             'status',
             'initiative',
@@ -214,6 +215,7 @@ class AdvertisementSerializer(serializers.ModelSerializer):
     class Meta:
         model = m.Advertisement
         fields = (
+            'id',
             'subcategory',
             'title',
             'description',

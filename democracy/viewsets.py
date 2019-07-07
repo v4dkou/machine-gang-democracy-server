@@ -6,7 +6,7 @@ from rest_framework.response import Response
 
 from . import models as m
 from . import serializers as s
-from .pagination import DateUpdatedPagination
+from .pagination import DateUpdatedPagination, DateCreatedPagination
 
 
 class DiscussionTopicViewSet(mixins.ListModelMixin, viewsets.GenericViewSet):
@@ -61,11 +61,13 @@ class AdvertisementCategoryViewset(mixins.ListModelMixin, viewsets.GenericViewSe
     queryset = m.AdvertisementCategory.objects.all()
     serializer_class = s.AdvertisementCategorySerializer
     permission_classes = (IsAuthenticated, )
+    ordering = ('order_col', )
 
 
 class AdvertisementViewset(mixins.ListModelMixin, mixins.CreateModelMixin, viewsets.GenericViewSet):
     serializer_class = s.AdvertisementSerializer
     permission_classes = (IsAuthenticated, )
+    pagination_class = DateCreatedPagination
 
     def get_queryset(self):
         queryset = m.Advertisement.objects.all()

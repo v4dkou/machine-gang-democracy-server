@@ -11,7 +11,7 @@ class ChatSerializer(serializers.ModelSerializer):
 
 
 class MessageSerializer(serializers.ModelSerializer):
-    user = UserSerializer(default=serializers.CurrentUserDefault())
+    user = UserSerializer(read_only=True)
 
     class Meta:
         model = m.Message
@@ -20,4 +20,9 @@ class MessageSerializer(serializers.ModelSerializer):
             'user',
             'chat',
             'text',
+            'date_created',
+        )
+
+        read_only_fields = (
+            'date_created',
         )
