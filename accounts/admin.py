@@ -47,7 +47,7 @@ class UserAdmin(auth.admin.UserAdmin):
     fieldsets = (
         (None, {'fields': ('username', 'password')}),
         ('Personal info', {
-            'fields': ('email', )
+            'fields': ('email', 'fullname', 'avatar')
         }),
         ('Permissions', {'fields': ('is_active', 'is_staff', )}),
         ('Important dates', {'fields': ('date_joined', )}),
@@ -56,7 +56,7 @@ class UserAdmin(auth.admin.UserAdmin):
     add_fieldsets = (
         (None, {
             'classes': ('wide',),
-            'fields': ('username', 'email', 'password1', 'password2'),
+            'fields': ('username', 'email', 'fullname', 'avatar', 'password1', 'password2'),
         }),
     )
 
