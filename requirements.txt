@@ -1,5 +1,5 @@
 Django==2.2.3
-djangorestframework==3.9.4
+djangorestframework==3.11.2
 djangorestframework-jwt==1.11.0
 djangorestframework-camel-case==1.0.3
 psycopg2==2.8.3
